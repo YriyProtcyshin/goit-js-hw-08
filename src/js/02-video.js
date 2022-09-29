@@ -15,14 +15,6 @@ if (currentTime) {
 // События при воспроизведении видео
 player.on('timeupdate', throttle(onPlay, 1000));
 
-// Событие при окончании видео
-player.on('ended', throttle(endPlay, 2000));
-
 function onPlay(data) {
   localStorage.setItem('videoplayer-current-time', data.seconds);
-}
-
-function endPlay() {
-  player.off('timeupdate');
-  throttle(localStorage.removeItem('videoplayer-current-time'), 2000);
 }
