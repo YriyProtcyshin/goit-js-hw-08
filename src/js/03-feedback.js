@@ -2,6 +2,7 @@ import throttle from 'lodash.throttle';
 
 //=================== Глобальные переменные  =========================
 const STORAGEKEY = 'feedback-form-state'; // имя ключа для localStorage
+
 const feedbackMessage = {}; // глобальный объект для localStorage
 
 //ссылка на форму
@@ -15,6 +16,7 @@ if (localStorage.getItem(STORAGEKEY)) {
 
   for (const elem in feedback) {
     onClickForm.elements[elem].value = feedback[elem];
+    feedbackMessage[elem] = feedback[elem];
   }
   //   onClickForm.elements.email.value = feedback['email'];
   //   onClickForm.elements.message.value = feedback['message'];
@@ -29,6 +31,7 @@ onClickForm.addEventListener('submit', onSubmitButton);
 function getInputText(event) {
   feedbackMessage[event.target.name] = event.target.value;
   localStorage.setItem(STORAGEKEY, JSON.stringify(feedbackMessage));
+  console.log(feedbackMessage);
 }
 
 // действия при нажатии кнопки Submit
